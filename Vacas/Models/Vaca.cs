@@ -9,6 +9,7 @@ public class Vaca
     public double? Peso { get; set; }
     public double? Edad { get; set; }
     public bool Vivo { get; set; }
-    public ObjectId HistoriaVac {  get; set; }
-    public ObjectId InfoParto { get; set; }
+    public string Padre { get; set; }
+    public string HistoriaVac {  get; set; }
+    public string InfoParto { get; set; }
 }

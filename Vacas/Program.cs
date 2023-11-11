@@ -1,3 +1,4 @@
+using HistorialVacunacions.Repositories;
 using Microsoft.EntityFrameworkCore;
 using MongoDB.Driver;
 using Vacas.Models;
@@ -20,6 +21,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<IVaca, VacaI>();
+builder.Services.AddTransient<IHistorialVacunacion, HistorialVacunacionI>();
 
 var app = builder.Build();
 
