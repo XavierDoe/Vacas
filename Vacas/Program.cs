@@ -21,6 +21,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<IVaca, VacaI>();
+builder.Services.AddTransient<ITrabajador, TrabajadorI>();
 builder.Services.AddTransient<IHistorialVacunacion, HistorialVacunacionI>();
 
 var app = builder.Build();
