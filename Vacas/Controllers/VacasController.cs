@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
+using Vacas.Repositories;
 using Vacas.Models;
+
+// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Vacas.Controllers
 {
@@ -13,112 +11,49 @@ namespace Vacas.Controllers
     [ApiController]
     public class VacasController : ControllerBase
     {
-        private readonly VacaContext _context;
-
-        public VacasController(VacaContext context)
+        private readonly IVaca _Vaca;
+        public VacasController(IVaca VacaRepository)
         {
-            _context = context;
+            _Vaca = VacaRepository;
         }
 
-        // GET: api/Vacas
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Vaca>>> GetVacas()
-        {
-          if (_context.Vacas == null)
-          {
-              return NotFound();
-          }
-            return await _context.Vacas.ToListAsync();
-        }
-
-        // GET: api/Vacas/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Vaca>> GetVaca(long id)
-        {
-          if (_context.Vacas == null)
-          {
-              return NotFound();
-          }
-            var vaca = await _context.Vacas.FindAsync(id);
-
-            if (vaca == null)
-            {
-                return NotFound();
-            }
-
-            return vaca;
-        }
-
-        // PUT: api/Vacas/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutVaca(long id, Vaca vaca)
-        {
-            if (id != vaca.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(vaca).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!VacaExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
-        // POST: api/Vacas
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Vaca>> PostVaca(Vaca vaca)
+        public async Task<IActionResult> Create(Vaca Vaca)
         {
-          if (_context.Vacas == null)
-          {
-              return Problem("Entity set 'VacaContext.Vacas'  is null.");
-          }
-            _context.Vacas.Add(vaca);
-            await _context.SaveChangesAsync();
+            var id = await _Vaca.Create(Vaca);
 
-            //return CreatedAtAction("GetVaca", new { id = vaca.Id }, vaca);
-            return CreatedAtAction(nameof(GetVaca), new { id = vaca.Id }, vaca);
+            return new JsonResult(id.ToString());
         }
 
-        // DELETE: api/Vacas/5
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Get(string id)
+        {
+            var Vaca = await _Vaca.Get(ObjectId.Parse(id));
+
+            return new JsonResult(Vaca);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            var Vacas = await _Vaca.GetAll();
+            return new JsonResult(Vacas);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(string id, Vaca Vaca)
+        {
+            var result = await _Vaca.Update(ObjectId.Parse(id), Vaca);
+
+            return new JsonResult(result);
+        }
+
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteVaca(long id)
+        public async Task<IActionResult> Delete(string id)
         {
-            if (_context.Vacas == null)
-            {
-                return NotFound();
-            }
-            var vaca = await _context.Vacas.FindAsync(id);
-            if (vaca == null)
-            {
-                return NotFound();
-            }
+            var result = await _Vaca.Delete(ObjectId.Parse(id));
 
-            _context.Vacas.Remove(vaca);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-
-        private bool VacaExists(long id)
-        {
-            return (_context.Vacas?.Any(e => e.Id == id)).GetValueOrDefault();
+            return new JsonResult(result);
         }
     }
 }
