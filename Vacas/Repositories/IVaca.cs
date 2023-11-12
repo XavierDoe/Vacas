@@ -11,6 +11,9 @@ namespace Vacas.Repositories
         // Read
         Task<Vaca> Get(ObjectId objectId);
 
+        // Read all
+        Task<IEnumerable<Vaca>> GetAll();
+
         // Update
         Task<bool> Update(ObjectId objectId, Vaca vaca);
 

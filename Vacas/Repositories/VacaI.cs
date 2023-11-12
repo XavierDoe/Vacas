@@ -31,7 +31,7 @@ namespace Vacas.Repositories
             return Vaca;
         }
 
-        public async Task<IEnumerable<Vaca>> Get()
+        public async Task<IEnumerable<Vaca>> GetAll()
         {
             var Vacas = await _Vaca.Find(_ => true).ToListAsync();
 

@@ -33,6 +33,13 @@ namespace Vacas.Controllers
             return new JsonResult(Vaca);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            var Vacas = await _Vaca.GetAll();
+            return new JsonResult(Vacas);
+        }
+
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(string id, Vaca Vaca)
         {

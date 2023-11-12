@@ -15,10 +15,10 @@ namespace Vacas.Repositories
 
             _Trabajador = collection;
         }
-        public async Task<ObjectId> Create(Trabajador Trabajador)
+        public async Task<ObjectId> Create(Trabajador trabajador)
         {
-            await _Trabajador.Insert(Trabajador);
-            return Trabajador.Id;
+            await _Trabajador.InsertOneAsync(trabajador);
+            return trabajador.Id;
 
         }
 
@@ -41,13 +41,13 @@ namespace Vacas.Repositories
         {
             var filter = Builders<Trabajador>.Filter.Eq(c => c.Id, objectId);
             var update = Builders<Trabajador>.Update
-                .Set(c => c.Nombre, Trabajador.Nombre)
-                .Set(c => c.Edad, Trabajador.Edad)
-                .Set(c => c.Sexo, Trabajador.Sexo)
-                .Set(c => c.HistoriaEmpleo, Trabajador.HistoriaEmpleo)
-                .Set(c => c.Salario, Trabajador.Salario)
-                .Set(c => c.Permisos, Trabajador.Permisos)
-                .Set(c => c.Certificaciones, Trabajador.Certificaciones);
+                .Set(c => c.Nombre, trabajador.Nombre)
+                .Set(c => c.Edad, trabajador.Edad)
+                .Set(c => c.Sexo, trabajador.Sexo)
+                .Set(c => c.HistoriaEmpleo, trabajador.HistoriaEmpleo)
+                .Set(c => c.Salario, trabajador.Salario)
+                .Set(c => c.Permisos, trabajador.Permisos)
+                .Set(c => c.Certificaciones, trabajador.Certificaciones);
             var result = await _Trabajador.UpdateOneAsync(filter, update);
 
             return result.ModifiedCount == 1;

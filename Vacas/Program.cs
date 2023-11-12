@@ -1,4 +1,5 @@
 using HistorialVacunacions.Repositories;
+using Inventarios.Repositories;
 using Microsoft.EntityFrameworkCore;
 using MongoDB.Driver;
 using Vacas.Models;
@@ -23,6 +24,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddTransient<IVaca, VacaI>();
 builder.Services.AddTransient<ITrabajador, TrabajadorI>();
 builder.Services.AddTransient<IHistorialVacunacion, HistorialVacunacionI>();
+builder.Services.AddTransient<IInventario, InventarioI>();
 
 var app = builder.Build();
 
