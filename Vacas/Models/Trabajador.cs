@@ -13,5 +13,10 @@ public class Trabajador
     public double? Salario { get; set; }
     public string? Permisos { get; set; }
     public string? Certificaciones { get; set; }
+    public string IdTrabajador => IdVac(Id);
+    public String IdVac(ObjectId id)
+    {
+        return id.ToString();
+    }
 }
 

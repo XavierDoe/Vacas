@@ -9,5 +9,10 @@ namespace Vacas.Models
         public List<DateOnly> FechaVacunas {  get; set; }
         public List<Enfermedades> Enfermedades { get; set; }
         public List<Tratamientos>  Tratamientos { get; set; }
+        public string IdHistorialVacunacion => IdVac(Id);
+        public String IdVac(ObjectId id)
+        {
+            return id.ToString();
+        }
     }
 }

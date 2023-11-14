@@ -1,5 +1,7 @@
 ﻿using MongoDB.Bson;
 using System;
+using System.Security.Cryptography.X509Certificates;
+
 namespace Vacas.Models;
 
 public class Vaca
@@ -12,4 +14,9 @@ public class Vaca
     public string Padre { get; set; }
     public string HistoriaVac {  get; set; }
     public string InfoParto { get; set; }
+    public string IdVaca => IdVac(Id);
+    public String IdVac (ObjectId id)
+    {
+        return id.ToString();
+    }
 }
