@@ -4,21 +4,23 @@ using Vacas.Models;
 namespace Vacas.Repositories
 {
 
-        public interface ITrabajador
-        {
-            // Create
-            Task<ObjectId> Create(Trabajador trabajador);
+    public interface ITrabajador
+    {
+        // Create
+        Task<ObjectId> Create(Trabajador trabajador);
 
-            // Read
-            Task<Trabajador> Get(ObjectId objectId);
+        // Read
+        Task<Trabajador> Get(ObjectId objectId);
 
-            // Update
-            Task<bool> Update(ObjectId objectId, Trabajador trabajador);
+        Task<IEnumerable<Trabajador>> GetAll();
 
-            // Delete
-            Task<bool> Delete(ObjectId objectId);
-        }
-    
+        // Update
+        Task<bool> Update(ObjectId objectId, Trabajador trabajador);
+
+        // Delete
+        Task<bool> Delete(ObjectId objectId);
+    }
+
 
 
 }

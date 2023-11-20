@@ -44,6 +44,9 @@ namespace Inventarios.Repositories
             var filter = Builders<Inventario>.Filter.Eq(c => c.Id, objectId);
             var update = Builders<Inventario>.Update
                 .Set(c => c.Cantidad, Inventario.Cantidad)
+                .Set(c => c.descripcion, Inventario.descripcion)
+                .Set(c => c.precio, Inventario.precio)
+                .Set(c => c.tipoArticulo, Inventario.tipoArticulo)
                 .Set(c => c.NombreArticulo, Inventario.NombreArticulo);
             var result = await _Inventario.UpdateOneAsync(filter, update);
 

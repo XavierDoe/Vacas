@@ -7,7 +7,7 @@ using Vacas.Models;
 
 namespace Vacas.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("/[controller]")]
     [ApiController]
     public class VacasController : ControllerBase
     {

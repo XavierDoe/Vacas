@@ -12,5 +12,8 @@ namespace Vacas.Models
         {
             return id.ToString();
         }
+        public String? tipoArticulo { get; set; }
+        public String descripcion { get; set; }
+        public double? precio { get; set; }
     }
 }

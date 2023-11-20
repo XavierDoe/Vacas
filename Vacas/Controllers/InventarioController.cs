@@ -6,7 +6,7 @@ using Vacas.Repositories;
 
 namespace Inventarios.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("/[controller]")]
     [ApiController]
     public class InventarioController : ControllerBase
     {

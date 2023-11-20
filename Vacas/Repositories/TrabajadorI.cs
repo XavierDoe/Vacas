@@ -30,7 +30,7 @@ namespace Vacas.Repositories
             return Trabajador;
         }
 
-        public async Task<IEnumerable<Trabajador>> Get()
+        public async Task<IEnumerable<Trabajador>> GetAll()
         {
             var Trabajadores = await _Trabajador.Find(_ => true).ToListAsync();
 

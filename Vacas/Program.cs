@@ -27,13 +27,8 @@ builder.Services.AddTransient<IHistorialVacunacion, HistorialVacunacionI>();
 builder.Services.AddTransient<IInventario, InventarioI>();
 
 var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 

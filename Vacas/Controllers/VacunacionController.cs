@@ -6,7 +6,7 @@ using Vacas.Repositories;
 
 namespace Vacas.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("/[controller]")]
     [ApiController]
     public class VacunacionController : Controller
     {

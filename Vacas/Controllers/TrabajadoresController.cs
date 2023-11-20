@@ -5,7 +5,7 @@ using Vacas.Models;
 
 namespace Vacas.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("/[controller]")]
     [ApiController]
     public class TrabajadoresController : ControllerBase
     {
@@ -21,6 +21,13 @@ namespace Vacas.Controllers
             var id = await _Trabajador.Create(Trabajador);
 
             return new JsonResult(id.ToString());
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            var Vacas = await _Trabajador.GetAll();
+            return new JsonResult(Vacas);
         }
 
         [HttpGet("{id}")]
